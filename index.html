@@ -174,13 +174,30 @@
 
   var circles=[];
   function onKeyDown(event) {
-    if(keyData[event.key]){
+    if(event.key == "a" || event.key=="b" || event.key=="c" || event.key=="d"||event.key=="e" || event.key=="f" || event.key=="g" || event.key=="l"){
+      console.log(event.key)
 
       var maxPoint=new Point(view.size.width, view.size.height);
       var randomPoint=Point.random();
-      var point=maxPoint * randomPoint;
+      var poin=maxPoint * randomPoint;
       // When a key is pressed, set the content of the text item:
       // new Path.Circle(point, 50).fillColor = 'purple';
+      // var newCircle=new Path.Circle(point,500);
+      // newCircle.fillColor=keyData[event.key].color;
+      var path = new Path.Rectangle({
+        	point: [poin.x, poin.y],
+          size: [300, 300],
+          strokeColor: keyData[event.key].color
+});
+console.log(path);
+      keyData[event.key].sound.play();
+      circles.push(path);
+    }
+    else{
+      var maxPoint=new Point(view.size.width, view.size.height);
+      var randomPoint=Point.random();
+      var point=maxPoint * randomPoint;
+
       var newCircle=new Path.Circle(point,500);
       newCircle.fillColor=keyData[event.key].color;
       keyData[event.key].sound.play();
@@ -190,7 +207,7 @@
 }
   function onFrame(event){
     for(var i=0;i<circles.length;i++){
-      circles[i].fillColor.hue +=1;
+      // circles[i].fillColor.hue +=1;
       circles[i].scale(.9);
     }
         // animatedCircle.scale(.9);
